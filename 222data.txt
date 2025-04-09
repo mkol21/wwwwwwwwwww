@@ -1,0 +1,128 @@
+-- 02_locations.sql
+-- Populate warehouse and store locations for GAP Retail Database
+
+USE gap_retail_db;
+
+-- Disable foreign key checks for batch inserts
+SET FOREIGN_KEY_CHECKS=0;
+
+START TRANSACTION;
+
+-- Reset auto-increment values
+ALTER TABLE warehouses AUTO_INCREMENT = 1;
+ALTER TABLE stores AUTO_INCREMENT = 1;
+
+-- Populate Warehouses table
+INSERT INTO warehouses (WarehouseName, WarehouseLocation, WarehouseCapacity, IsActive, ContactPhone, ContactEmail, OperatingHours) VALUES
+('Northeast Distribution Center', '100 Distribution Way, Fishkill, NY 12524', 150000, TRUE, '845-555-1000', 'nedc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 8:00-16:00'),
+('Mid-Atlantic Fulfillment Center', '200 Logistics Pkwy, Gallatin, TN 37066', 200000, TRUE, '615-555-2000', 'mafc@gap-distribution.com', 'Mon-Sat 6:00-23:00'),
+('Southeast Regional Hub', '300 Commerce Dr, Atlanta, GA 30354', 180000, TRUE, '404-555-3000', 'serh@gap-distribution.com', 'Mon-Sun 7:00-23:00'),
+('Midwest Distribution Facility', '400 Industrial Ave, Columbus, OH 43219', 175000, TRUE, '614-555-4000', 'mwdf@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Southwest Fulfillment Center', '500 Warehouse Blvd, Fort Worth, TX 76177', 210000, TRUE, '817-555-5000', 'swfc@gap-distribution.com', 'Mon-Sun 24 hours'),
+('Northwest Distribution Hub', '600 Shipping Ln, Reno, NV 89502', 160000, TRUE, '775-555-6000', 'nwdh@gap-distribution.com', 'Mon-Sat 6:00-22:00'),
+('West Coast Primary Center', '700 Logistics Way, Ontario, CA 91761', 250000, TRUE, '909-555-7000', 'wcpc@gap-distribution.com', 'Mon-Sun 24 hours'),
+('Pacific Northwest Facility', '800 Distribution Rd, Sumner, WA 98390', 140000, TRUE, '253-555-8000', 'pnwf@gap-distribution.com', 'Mon-Fri 7:00-23:00, Sat 8:00-16:00'),
+('Rocky Mountain Distribution', '900 Supply Chain Dr, Aurora, CO 80011', 130000, TRUE, '303-555-9000', 'rmdc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Central US Fulfillment', '1000 Logistics Park, Groveport, OH 43125', 185000, TRUE, '614-555-1100', 'cusf@gap-distribution.com', 'Mon-Sun 6:00-22:00'),
+('East Coast E-Commerce Center', '1100 Fulfillment Way, Florence, NJ 08518', 220000, TRUE, '609-555-1200', 'ecec@gap-distribution.com', 'Mon-Sun 24 hours'),
+('Gulf Coast Distribution', '1200 Port Blvd, Houston, TX 77029', 170000, TRUE, '713-555-1300', 'gcdc@gap-distribution.com', 'Mon-Sat 7:00-23:00'),
+('Great Lakes Fulfillment', '1300 Inventory Ave, Romeoville, IL 60446', 190000, TRUE, '815-555-1400', 'glfc@gap-distribution.com', 'Mon-Sat 6:00-22:00'),
+('Mid-South Distribution', '1400 Logistics Rd, Memphis, TN 38116', 160000, TRUE, '901-555-1500', 'msdc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 8:00-16:00'),
+('California South Hub', '1500 Commerce Center, San Bernardino, CA 92408', 230000, TRUE, '909-555-1600', 'cash@gap-distribution.com', 'Mon-Sun 24 hours'),
+('Toronto Distribution Center', '1600 Steeles Ave E, Brampton, ON L6T 4L4, Canada', 145000, TRUE, '905-555-1700', 'todc@gap-distribution.ca', 'Mon-Fri 7:00-23:00, Sat 8:00-16:00'),
+('Montreal Fulfillment Center', '1700 Rue Sherbrooke, Montreal, QC H1L 1E3, Canada', 125000, TRUE, '514-555-1800', 'mtfc@gap-distribution.ca', 'Mon-Fri 7:00-23:00'),
+('Vancouver Regional Warehouse', '1800 Marine Way, Delta, BC V4K 5G6, Canada', 115000, TRUE, '604-555-1900', 'vrwh@gap-distribution.ca', 'Mon-Fri 7:00-22:00, Sat 8:00-15:00'),
+('California Central Valley Hub', '1900 Distribution Ln, Tracy, CA 95304', 210000, TRUE, '209-555-2000', 'ccvh@gap-distribution.com', 'Mon-Sun 6:00-22:00'),
+('New England Distribution', '2000 Commerce Way, Mansfield, MA 02048', 140000, TRUE, '508-555-2100', 'nedc-ma@gap-distribution.com', 'Mon-Fri 7:00-23:00, Sat 8:00-16:00'),
+('Appalachian Regional Center', '2100 Logistics Blvd, Martinsburg, WV 25401', 130000, TRUE, '304-555-2200', 'aprc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Florida Primary Hub', '2200 Distribution Dr, Jacksonville, FL 32218', 175000, TRUE, '904-555-2300', 'flph@gap-distribution.com', 'Mon-Sat 6:00-22:00'),
+('Arizona Fulfillment Center', '2300 Logistics Pkwy, Phoenix, AZ 85043', 160000, TRUE, '602-555-2400', 'azfc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Albuquerque Distribution', '2400 Commerce Loop, Albuquerque, NM 87106', 110000, TRUE, '505-555-2500', 'abqd@gap-distribution.com', 'Mon-Fri 7:00-20:00'),
+('Las Vegas Facility', '2500 Supply Chain Ave, North Las Vegas, NV 89030', 140000, TRUE, '702-555-2600', 'lvfc@gap-distribution.com', 'Mon-Sat 6:00-22:00'),
+('Indianapolis Distribution', '2600 Fulfillment Rd, Indianapolis, IN 46241', 165000, TRUE, '317-555-2700', 'indc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Kansas City Hub', '2700 Logistics Way, Edwardsville, KS 66111', 150000, TRUE, '913-555-2800', 'kchb@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 8:00-16:00'),
+('Minneapolis Facility', '2800 Commerce Dr, Rogers, MN 55374', 145000, TRUE, '763-555-2900', 'mnfc@gap-distribution.com', 'Mon-Fri 7:00-23:00, Sat 8:00-16:00'),
+('Detroit Area Distribution', '2900 Logistics Pkwy, Romulus, MI 48174', 155000, TRUE, '734-555-3000', 'dtdc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Salt Lake Regional Center', '3000 Distribution Ave, Salt Lake City, UT 84116', 140000, TRUE, '801-555-3100', 'slrc@gap-distribution.com', 'Mon-Fri 7:00-23:00, Sat 8:00-16:00'),
+('Portland Distribution', '3100 Logistics Blvd, Portland, OR 97218', 130000, TRUE, '503-555-3200', 'ptld@gap-distribution.com', 'Mon-Fri 7:00-22:00, Sat 8:00-15:00'),
+('Sacramento Valley Center', '3200 Supply Chain Dr, West Sacramento, CA 95691', 145000, TRUE, '916-555-3300', 'svdc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Oklahoma City Facility', '3300 Distribution Way, Oklahoma City, OK 73179', 120000, TRUE, '405-555-3400', 'okcd@gap-distribution.com', 'Mon-Fri 7:00-22:00'),
+('Louisville Distribution', '3400 Logistics Ave, Shepherdsville, KY 40165', 150000, TRUE, '502-555-3500', 'kydc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Charlotte Regional Hub', '3500 Commerce Park, Charlotte, NC 28273', 165000, TRUE, '704-555-3600', 'chrh@gap-distribution.com', 'Mon-Sat 6:00-22:00'),
+('UK Primary Center', '3600 Logistics Way, Milton Keynes MK17 8EF, UK', 120000, TRUE, '+44-1908-555-3700', 'ukpc@gap-distribution.co.uk', 'Mon-Fri 7:00-22:00'),
+('European Central Hub', '3700 Distribution Str, Venlo, 5928 Netherlands', 160000, TRUE, '+31-77-555-3800', 'euhub@gap-distribution.eu', 'Mon-Fri 7:00-23:00'),
+('Tokyo Distribution', '3800 Logistics Building, Narita, Chiba 286-0021, Japan', 90000, TRUE, '+81-476-555-3900', 'tokyo@gap-distribution.jp', 'Mon-Fri 8:00-22:00'),
+('Shanghai Fulfillment Center', '3900 Logistics Park, Pudong, Shanghai 201306, China', 130000, TRUE, '+86-21-555-4000', 'shanghai@gap-distribution.cn', 'Mon-Sat 7:00-23:00'),
+('Sydney Distribution', '4000 Commerce Dr, Eastern Creek, NSW 2766, Australia', 100000, TRUE, '+61-2-555-4100', 'sydney@gap-distribution.com.au', 'Mon-Fri 7:00-22:00'),
+('Mexico City Hub', '4100 Logistics Ave, Cuautitlán Izcalli, 54740, Mexico', 110000, TRUE, '+52-55-555-4200', 'mexicocity@gap-distribution.mx', 'Mon-Fri 7:00-22:00, Sat 8:00-15:00'),
+('South Florida Center', '4200 Distribution Blvd, Miami, FL 33178', 140000, TRUE, '305-555-4300', 'sflc@gap-distribution.com', 'Mon-Sat 7:00-23:00'),
+('St. Louis Distribution', '4300 Logistics Way, Edwardsville, IL 62025', 135000, TRUE, '618-555-4400', 'stldc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 7:00-15:00'),
+('Baltimore Area Hub', '4400 Distribution Dr, Hagerstown, MD 21740', 150000, TRUE, '301-555-4500', 'bltdc@gap-distribution.com', 'Mon-Fri 6:00-22:00, Sat 8:00-16:00'),
+('Iowa Distribution Center', '4500 Commerce Park, Grimes, IA 50111', 125000, TRUE, '515-555-4600', 'iadc@gap-distribution.com', 'Mon-Fri 7:00-22:00'),
+('Omaha Facility', '4600 Logistics Rd, Omaha, NE 68137', 120000, TRUE, '402-555-4700', 'nedc-ne@gap-distribution.com', 'Mon-Fri 7:00-22:00'),
+('San Juan Center', '4700 Distribution Ave, Carolina, PR 00987', 85000, TRUE, '787-555-4800', 'prdc@gap-distribution.com', 'Mon-Fri 7:00-20:00'),
+('Hawaii Distribution', '4800 Logistics Blvd, Honolulu, HI 96819', 70000, TRUE, '808-555-4900', 'hidc@gap-distribution.com', 'Mon-Fri 7:00-20:00'),
+('Alaska Facility', '4900 Supply Chain Rd, Anchorage, AK 99518', 60000, TRUE, '907-555-5000', 'akfc@gap-distribution.com', 'Mon-Fri 7:00-19:00');
+
+-- Populate Stores table
+INSERT INTO stores (StoreName, Location, StorePhone, StoreEmail, ManagerName, OperatingHours, StoreSize, IsActive, SupportsPickup, RegionID) VALUES
+('GAP 5th Avenue Flagship', '680 5th Ave, New York, NY 10019', '212-555-0001', 'gap-5thave@gap.com', 'Emma Rodriguez', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 15000, TRUE, TRUE, 1),
+('GAP Times Square', '1466 Broadway, New York, NY 10036', '212-555-0002', 'gap-timessquare@gap.com', 'Michael Chen', 'Mon-Sun 9:00-22:00', 12000, TRUE, TRUE, 1),
+('GAP SoHo', '513 Broadway, New York, NY 10012', '212-555-0003', 'gap-soho@gap.com', 'Sarah Johnson', 'Mon-Sat 10:00-20:00, Sun 11:00-19:00', 8500, TRUE, TRUE, 1),
+('GAP Beverly Center', '8500 Beverly Blvd, Los Angeles, CA 90048', '323-555-0004', 'gap-beverly@gap.com', 'David Kim', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 9500, TRUE, TRUE, 2),
+('GAP Grove', '189 The Grove Dr, Los Angeles, CA 90036', '323-555-0005', 'gap-grove@gap.com', 'Jessica Martinez', 'Mon-Thu 10:00-21:00, Fri-Sat 10:00-22:00, Sun 10:00-20:00', 10000, TRUE, TRUE, 2),
+('GAP Santa Monica', '1355 3rd Street Promenade, Santa Monica, CA 90401', '310-555-0006', 'gap-santamonica@gap.com', 'Robert Taylor', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 8000, TRUE, TRUE, 2),
+('GAP Michigan Avenue', '555 N Michigan Ave, Chicago, IL 60611', '312-555-0007', 'gap-michigan@gap.com', 'Amanda Wilson', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 11000, TRUE, TRUE, 3),
+('GAP State Street', '35 N State St, Chicago, IL 60602', '312-555-0008', 'gap-state@gap.com', 'Brandon Lee', 'Mon-Sat 10:00-20:00, Sun 11:00-18:00', 9000, TRUE, TRUE, 3),
+('GAP Market Street', '890 Market St, San Francisco, CA 94102', '415-555-0009', 'gap-market@gap.com', 'Michelle Garcia', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 12500, TRUE, TRUE, 2),
+('GAP Union Square', '170 O\'Farrell St, San Francisco, CA 94102', '415-555-0010', 'gap-union@gap.com', 'William Brown', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 14000, TRUE, TRUE, 2),
+('GAP Newbury', '140 Newbury St, Boston, MA 02116', '617-555-0011', 'gap-newbury@gap.com', 'Elizabeth White', 'Mon-Sat 10:00-20:00, Sun 11:00-19:00', 8000, TRUE, TRUE, 1),
+('GAP Copley Place', '100 Huntington Ave, Boston, MA 02116', '617-555-0012', 'gap-copley@gap.com', 'Thomas Anderson', 'Mon-Sat 10:00-21:00, Sun 12:00-18:00', 7500, TRUE, TRUE, 1),
+('GAP Georgetown', '1258 Wisconsin Ave NW, Washington, DC 20007', '202-555-0013', 'gap-georgetown@gap.com', 'Jennifer Davis', 'Mon-Sat 10:00-20:00, Sun 11:00-19:00', 9000, TRUE, TRUE, 1),
+('GAP Pentagon City', '1100 S Hayes St, Arlington, VA 22202', '703-555-0014', 'gap-pentagon@gap.com', 'Christopher Wilson', '10:00-21:00, Sun 11:00-18:00', 8500, TRUE, TRUE, 1),
+('GAP Lincoln Road', '737 Lincoln Rd, Miami Beach, FL 33139', '305-555-0015', 'gap-lincoln@gap.com', 'Nicole Garcia', 'Mon-Thu 10:00-22:00, Fri-Sat 10:00-23:00, Sun 11:00-20:00', 9000, TRUE, TRUE, 4),
+('GAP Aventura Mall', '19501 Biscayne Blvd, Aventura, FL 33180', '305-555-0016', 'gap-aventura@gap.com', 'Andrew Smith', 'Mon-Sat 10:00-21:00, Sun 12:00-20:00', 10000, TRUE, TRUE, 4),
+('GAP Lenox Square', '3393 Peachtree Rd NE, Atlanta, GA 30326', '404-555-0017', 'gap-lenox@gap.com', 'Stephanie Johnson', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 9500, TRUE, TRUE, 4),
+('GAP Atlantic Station', '264 19th St NW, Atlanta, GA 30363', '404-555-0018', 'gap-atlantic@gap.com', 'James Williams', 'Mon-Thu 10:00-21:00, Fri-Sat 10:00-22:00, Sun 11:00-20:00', 8000, TRUE, TRUE, 4),
+('GAP Galleria Dallas', '13350 Dallas Pkwy, Dallas, TX 75240', '214-555-0019', 'gap-galleria@gap.com', 'Ashley Martinez', 'Mon-Sat 10:00-21:00, Sun 12:00-18:00', 9000, TRUE, TRUE, 5),
+('GAP NorthPark Center', '8687 N Central Expy, Dallas, TX 75225', '214-555-0020', 'gap-northpark@gap.com', 'Brian Jackson', 'Mon-Sat 10:00-20:00, Sun 12:00-18:00', 10500, TRUE, TRUE, 5),
+('GAP Houston Galleria', '5085 Westheimer Rd, Houston, TX 77056', '713-555-0021', 'gap-houstongalleria@gap.com', 'Rachel Thompson', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 11000, TRUE, TRUE, 5),
+('GAP Memorial City', '303 Memorial City Way, Houston, TX 77024', '713-555-0022', 'gap-memorial@gap.com', 'Kevin Harris', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 9000, TRUE, TRUE, 5),
+('GAP Mall of America', '60 E Broadway, Bloomington, MN 55425', '952-555-0023', 'gap-moa@gap.com', 'Danielle Miller', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 12000, TRUE, TRUE, 3),
+('GAP Denver Pavilions', '500 16th St, Denver, CO 80202', '303-555-0024', 'gap-denver@gap.com', 'Jonathan Clark', 'Mon-Sat 10:00-21:00, Sun 11:00-18:00', 8500, TRUE, TRUE, 5),
+('GAP Cherry Creek', '3000 E 1st Ave, Denver, CO 80206', '303-555-0025', 'gap-cherry@gap.com', 'Melissa Lewis', 'Mon-Sat 10:00-20:00, Sun 11:00-18:00', 7500, TRUE, TRUE, 5),
+('GAP Scottsdale Fashion Square', '7014 E Camelback Rd, Scottsdale, AZ 85251', '480-555-0026', 'gap-scottsdale@gap.com', 'Joshua Walker', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 8000, TRUE, TRUE, 6),
+('GAP Ala Moana Center', '1450 Ala Moana Blvd, Honolulu, HI 96814', '808-555-0027', 'gap-alamoana@gap.com', 'Kaitlyn Young', 'Mon-Sat 9:30-21:00, Sun 10:00-19:00', 9000, TRUE, TRUE, 2),
+('GAP Bellevue Square', '575 Bellevue Square, Bellevue, WA 98004', '425-555-0028', 'gap-bellevue@gap.com', 'Matthew Allen', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 8000, TRUE, TRUE, 6),
+('GAP Westlake Center', '400 Pine St, Seattle, WA 98101', '206-555-0029', 'gap-westlake@gap.com', 'Olivia Scott', 'Mon-Sat 10:00-20:00, Sun 11:00-18:00', 7500, TRUE, TRUE, 6),
+('GAP Pioneer Place', '700 SW 5th Ave, Portland, OR 97204', '503-555-0030', 'gap-pioneer@gap.com', 'Daniel Green', 'Mon-Sat 10:00-20:00, Sun 11:00-18:00', 7000, TRUE, TRUE, 6),
+('GAP King of Prussia', '160 N Gulph Rd, King of Prussia, PA 19406', '610-555-0031', 'gap-kop@gap.com', 'Samantha Baker', 'Mon-Sat 10:00-21:00, Sun 11:00-18:00', 11000, TRUE, TRUE, 1),
+('GAP Walnut Street', '1504 Walnut St, Philadelphia, PA 19102', '215-555-0032', 'gap-walnut@gap.com', 'Eric Nelson', 'Mon-Sat 10:00-20:00, Sun 11:00-18:00', 6500, TRUE, TRUE, 1),
+('GAP Easton Town Center', '4030 The Strand E, Columbus, OH 43219', '614-555-0033', 'gap-easton@gap.com', 'Andrea Hill', 'Mon-Sat 10:00-21:00, Sun 12:00-18:00', 8500, TRUE, TRUE, 3),
+('GAP Las Vegas Strip', '3200 Las Vegas Blvd S, Las Vegas, NV 89109', '702-555-0034', 'gap-strip@gap.com', 'Steven Carter', 'Sun-Thu 10:00-23:00, Fri-Sat 10:00-00:00', 13000, TRUE, TRUE, 6),
+('GAP Fashion Show', '3200 Las Vegas Blvd S, Las Vegas, NV 89109', '702-555-0035', 'gap-fashionshow@gap.com', 'Laura Evans', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 10000, TRUE, TRUE, 6),
+('GAP Eaton Centre', '220 Yonge St, Toronto, ON M5B 2H1, Canada', '416-555-0036', 'gap-eaton@gap.com', 'Ryan Morgan', 'Mon-Fri 10:00-21:30, Sat 9:30-21:00, Sun 10:00-19:00', 11500, TRUE, TRUE, 7),
+('GAP Yorkdale', '3401 Dufferin St, Toronto, ON M6A 2T9, Canada', '416-555-0037', 'gap-yorkdale@gap.com', 'Natalie Parker', 'Mon-Fri 10:00-21:00, Sat 9:30-21:00, Sun 11:00-19:00', 9500, TRUE, TRUE, 7),
+('GAP Robson Street', '1125 Robson St, Vancouver, BC V6E 1B5, Canada', '604-555-0038', 'gap-robson@gap.com', 'Jason Wright', 'Mon-Sat 10:00-21:00, Sun 11:00-19:00', 8000, TRUE, TRUE, 7),
+('GAP Pacific Centre', '701 W Georgia St, Vancouver, BC V7Y 1G5, Canada', '604-555-0039', 'gap-pacific@gap.com', 'Megan Ross', 'Mon-Wed 10:00-19:00, Thu-Fri 10:00-21:00, Sat 10:00-19:00, Sun 11:00-18:00', 7500, TRUE, TRUE, 7),
+('GAP Regent Street', '258-260, Regent St, London W1B 3AF, UK', '+44-20-555-0040', 'gap-regent@gap.com', 'Victoria Turner', 'Mon-Sat 10:00-20:00, Sun 12:00-18:00', 12000, TRUE, TRUE, 8),
+('GAP Oxford Street', '376-384 Oxford St, London W1C 1JY, UK', '+44-20-555-0041', 'gap-oxford@gap.com', 'Alexander Hughes', 'Mon-Sat 9:00-21:00, Sun 11:30-18:00', 15000, TRUE, TRUE, 8),
+('GAP Champs-Élysées', '36 Avenue des Champs-Élysées, 75008 Paris, France', '+33-1-555-0042', 'gap-champs@gap.com', 'Sophie Martin', 'Mon-Sat 10:00-20:00, Sun 11:00-19:00', 13000, TRUE, TRUE, 8),
+('GAP Ginza', '4 Chome-3-2 Ginza, Chuo City, Tokyo 104-0061, Japan', '+81-3-555-0043', 'gap-ginza@gap.com', 'Takashi Tanaka', 'Mon-Sun 10:00-21:00', 11000, TRUE, TRUE, 9),
+('GAP Shibuya', 'Shibuya Scramble Square, Tokyo, Japan', '+81-3-555-0044', 'gap-shibuya@gap.com', 'Yuki Nakamura', 'Mon-Sun 10:00-21:00', 9500, TRUE, TRUE, 9),
+('GAP Hong Kong Central', 'IFC Mall, 8 Finance St, Central, Hong Kong', '+852-555-0045', 'gap-hongkong@gap.com', 'Wei Chen', 'Mon-Sun 10:00-22:00', 10000, TRUE, TRUE, 9),
+('GAP Sydney CBD', 'Pitt Street Mall, Sydney NSW 2000, Australia', '+61-2-555-0046', 'gap-sydney@gap.com', 'Chloe Wilson', 'Mon-Wed 9:00-19:00, Thu 9:00-21:00, Fri-Sat 9:00-19:00, Sun 10:00-19:00', 8000, TRUE, TRUE, 10),
+('GAP Mall of Dubai', 'The Dubai Mall, Dubai, United Arab Emirates', '+971-4-555-0047', 'gap-dubai@gap.com', 'Hassan Ahmed', 'Sat-Wed 10:00-22:00, Thu-Fri 10:00-00:00', 14000, TRUE, TRUE, 11),
+('GAP Polanco', 'Av. Presidente Masaryk 407, Polanco, Mexico City, Mexico', '+52-55-555-0048', 'gap-polanco@gap.com', 'Carlos Rodriguez', 'Mon-Sat 11:00-21:00, Sun 11:00-19:00', 7500, TRUE, TRUE, 12),
+('GAP Antara Fashion Hall', 'Av. Ejército Nacional 843, Granada, Mexico City, Mexico', '+52-55-555-0049', 'gap-antara@gap.com', 'Isabella Lopez', 'Mon-Sun 11:00-21:00', 8000, TRUE, TRUE, 12),
+('GAP São Paulo', 'Shopping Iguatemi, Av. Brigadeiro Faria Lima, São Paulo, Brazil', '+55-11-555-0050', 'gap-saopaulo@gap.com', 'Mateo Silva', 'Mon-Sat 10:00-22:00, Sun 14:00-20:00', 9000, TRUE, TRUE, 13);
+
+COMMIT;
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS=1;
+
+-- Verify data
+SELECT 'Warehouses', COUNT(*) FROM warehouses
+UNION ALL
+SELECT 'Stores', COUNT(*) FROM stores;

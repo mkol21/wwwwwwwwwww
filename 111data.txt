@@ -1,0 +1,138 @@
+-- 01_base_tables.sql
+-- Populate base tables for GAP Retail Database
+
+USE gap_retail_db;
+
+-- Disable foreign key checks for batch inserts
+SET FOREIGN_KEY_CHECKS=0;
+
+START TRANSACTION;
+
+-- Reset auto-increment values
+ALTER TABLE categories AUTO_INCREMENT = 1;
+ALTER TABLE payment_methods AUTO_INCREMENT = 1;
+ALTER TABLE payment_status AUTO_INCREMENT = 1;
+
+-- Populate Categories table
+-- First create parent categories
+INSERT INTO categories (CategoryName, CategoryDescription, ParentCategoryID, IsActive) VALUES
+('Men', 'All men\'s apparel and accessories', NULL, TRUE),
+('Women', 'All women\'s apparel and accessories', NULL, TRUE),
+('Kids', 'Children\'s clothing and accessories', NULL, TRUE),
+('Baby', 'Infant and toddler clothing and accessories', NULL, TRUE),
+('Teen', 'Teen fashion collections', NULL, TRUE),
+('Home', 'Home decor and essentials', NULL, TRUE),
+('Accessories', 'Fashion accessories for all', NULL, TRUE),
+('Sale', 'Discounted and clearance items', NULL, TRUE),
+('New Arrivals', 'Latest additions to our collections', NULL, TRUE),
+('Collections', 'Special and limited edition collections', NULL, TRUE);
+
+-- Now add subcategories with parent references
+INSERT INTO categories (CategoryName, CategoryDescription, ParentCategoryID, IsActive) VALUES
+-- Men's subcategories
+('Men\'s Tops', 'T-shirts, shirts, and sweaters for men', 1, TRUE),
+('Men\'s Bottoms', 'Pants, shorts, and jeans for men', 1, TRUE),
+('Men\'s Outerwear', 'Jackets, coats, and outerwear for men', 1, TRUE),
+('Men\'s Activewear', 'Athletic and workout wear for men', 1, TRUE),
+('Men\'s Swimwear', 'Swim trunks and beachwear for men', 1, TRUE),
+
+-- Women's subcategories
+('Women\'s Tops', 'T-shirts, blouses, and sweaters for women', 2, TRUE),
+('Women\'s Bottoms', 'Pants, shorts, skirts, and jeans for women', 2, TRUE),
+('Women\'s Dresses', 'Dresses and jumpsuits for women', 2, TRUE),
+('Women\'s Outerwear', 'Jackets, coats, and outerwear for women', 2, TRUE),
+('Women\'s Activewear', 'Athletic and workout wear for women', 2, TRUE),
+('Women\'s Swimwear', 'Swimsuits and beachwear for women', 2, TRUE),
+
+-- Kids' subcategories
+('Boys', 'Clothing for boys', 3, TRUE),
+('Girls', 'Clothing for girls', 3, TRUE),
+('Kids\' Accessories', 'Accessories for children', 3, TRUE),
+('Kids\' Activewear', 'Athletic and workout wear for kids', 3, TRUE),
+('Kids\' Outerwear', 'Jackets, coats, and outerwear for kids', 3, TRUE),
+
+-- Baby subcategories
+('Baby Boys', 'Clothing for baby boys', 4, TRUE),
+('Baby Girls', 'Clothing for baby girls', 4, TRUE),
+('Baby Essentials', 'Essential items for babies', 4, TRUE),
+('Baby Accessories', 'Accessories for babies', 4, TRUE),
+
+-- Teen subcategories
+('Teen Boys', 'Fashion for teen boys', 5, TRUE),
+('Teen Girls', 'Fashion for teen girls', 5, TRUE),
+
+-- Home subcategories
+('Bedding', 'Bed sheets, pillowcases, and comforters', 6, TRUE),
+('Bath', 'Towels, shower curtains, and bath accessories', 6, TRUE),
+('Decor', 'Decorative items for the home', 6, TRUE),
+
+-- Accessories subcategories
+('Hats', 'Hats for all ages', 7, TRUE),
+('Belts', 'Belts for all ages', 7, TRUE),
+('Bags', 'Bags and backpacks', 7, TRUE),
+('Jewelry', 'Necklaces, bracelets, and earrings', 7, TRUE),
+('Scarves', 'Scarves and wraps', 7, TRUE),
+('Sunglasses', 'Sunglasses for all ages', 7, TRUE),
+
+-- Collections subcategories
+('GAP Logo', 'Classic GAP logo wear', 10, TRUE),
+('Vintage', 'Vintage inspired styles', 10, TRUE),
+('Holiday', 'Holiday themed apparel and gifts', 10, TRUE),
+('Denim', 'Classic and contemporary denim styles', 10, TRUE),
+('Organic Cotton', 'Sustainable organic cotton collection', 10, TRUE),
+('Recycled', 'Products made from recycled materials', 10, TRUE);
+
+-- Add some third-level categories
+INSERT INTO categories (CategoryName, CategoryDescription, ParentCategoryID, IsActive) VALUES
+-- Men's Tops subcategories
+('Men\'s T-Shirts', 'Short-sleeved t-shirts for men', 11, TRUE),
+('Men\'s Shirts', 'Button-down and dress shirts for men', 11, TRUE),
+('Men\'s Sweaters', 'Sweaters and pullovers for men', 11, TRUE),
+('Men\'s Hoodies', 'Hooded sweatshirts for men', 11, TRUE),
+
+-- Add a few inactive categories for testing
+('Discontinued Line', 'Products no longer in production', NULL, FALSE),
+('Seasonal Holiday 2023', 'Holiday 2023 special items', 10, FALSE);
+
+-- Populate Payment Methods table
+INSERT INTO payment_methods (MethodName, IsActive, ProcessingFee, PaymentGateway) VALUES
+('Credit Card', TRUE, 2.90, 'Stripe'),
+('Debit Card', TRUE, 1.50, 'Stripe'),
+('PayPal', TRUE, 3.20, 'PayPal'),
+('Apple Pay', TRUE, 2.00, 'Apple'),
+('Google Pay', TRUE, 2.00, 'Google'),
+('Samsung Pay', TRUE, 2.00, 'Samsung'),
+('Shop Pay', TRUE, 2.50, 'Shopify'),
+('Afterpay', TRUE, 4.00, 'Afterpay'),
+('Klarna', TRUE, 4.00, 'Klarna'),
+('Gift Card', TRUE, 0.00, 'Internal'),
+('Store Credit', TRUE, 0.00, 'Internal'),
+('Gap Credit Card', TRUE, 0.00, 'Synchrony'),
+('Venmo', TRUE, 3.00, 'PayPal'),
+('Bank Transfer', TRUE, 1.00, 'Plaid'),
+('Cash', TRUE, 0.00, 'In-Store');
+
+-- Populate Payment Status table
+INSERT INTO payment_status (StatusName, StatusDescription, IsSystemStatus) VALUES
+('Pending', 'Payment is being processed', TRUE),
+('Completed', 'Payment has been successfully processed', TRUE),
+('Failed', 'Payment processing has failed', TRUE),
+('Refunded', 'Payment has been refunded to the customer', TRUE),
+('Partially Refunded', 'Payment has been partially refunded to the customer', TRUE),
+('Authorized', 'Payment has been authorized but not yet captured', TRUE),
+('Voided', 'Payment has been voided before processing', TRUE),
+('Declined', 'Payment was declined by the payment processor', TRUE),
+('Chargeback', 'Payment has been disputed by the customer', TRUE),
+('Chargeback Resolved', 'Chargeback has been resolved', TRUE);
+
+COMMIT;
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS=1;
+
+-- Verify data
+SELECT 'Categories', COUNT(*) FROM categories
+UNION ALL
+SELECT 'Payment Methods', COUNT(*) FROM payment_methods
+UNION ALL
+SELECT 'Payment Status', COUNT(*) FROM payment_status;

@@ -1,0 +1,286 @@
+-- 03_suppliers_and_customers.sql
+-- Populate supplier and customer data for GAP Retail Database
+
+USE gap_retail_db;
+
+-- Disable foreign key checks for batch inserts
+SET FOREIGN_KEY_CHECKS=0;
+
+START TRANSACTION;
+
+-- Reset auto-increment values
+ALTER TABLE suppliers AUTO_INCREMENT = 1;
+ALTER TABLE customers AUTO_INCREMENT = 1;
+ALTER TABLE addresses AUTO_INCREMENT = 1;
+ALTER TABLE loyalty_accounts AUTO_INCREMENT = 1;
+
+-- Populate Suppliers table
+INSERT INTO suppliers (SupplierName, ContactName, ContactEmail, ContactPhone, Address, TaxID, PaymentTerms, LeadTimeDays, MinimumOrderQuantity, PreferredCurrency, IsActive, SupplierRating) VALUES
+('Organic Cotton Collective', 'Maria Gonzalez', 'maria@ocollective.com', '415-555-2000', '123 Sustainable Way, San Francisco, CA 94110', 'OCC-123456', 'Net 30', 14, 500, 'USD', TRUE, 4.8),
+('Denim Innovations Inc.', 'James Wilson', 'james@deniminnov.com', '213-555-2001', '456 Fashion Blvd, Los Angeles, CA 90012', 'DII-789123', 'Net 45', 21, 1000, 'USD', TRUE, 4.5),
+('EcoFabrics Global', 'Sophia Chen', 'sophia@ecofabrics.com', '604-555-2002', '789 Green Street, Vancouver, BC V6B 2M1, Canada', 'EFG-456789', 'Net 30', 10, 250, 'CAD', TRUE, 4.7),
+('Premium Textiles Ltd.', 'Richard Thompson', 'richard@premiumtex.com', '212-555-2003', '101 Luxury Lane, New York, NY 10001', 'PTL-234567', 'Net 30', 7, 300, 'USD', TRUE, 4.3),
+('Fast Fashion Supply Co.', 'Jennifer Lopez', 'jennifer@fastfashionsupply.com', '305-555-2004', '202 Quick Delivery Dr, Miami, FL 33101', 'FFS-345678', 'Net 15', 5, 1000, 'USD', TRUE, 3.9),
+('Sustainable Buttons & Trims', 'Michael Green', 'michael@sustainablebt.com', '503-555-2005', '303 Eco Way, Portland, OR 97201', 'SBT-456789', 'Net 30', 14, 100, 'USD', TRUE, 4.6),
+('Global Textile Group', 'Sarah Johnson', 'sarah@globaltextile.com', '+44-20-555-2006', '404 International Blvd, London EC1A 1BB, UK', 'GTG-567890', 'Net 60', 28, 2000, 'GBP', TRUE, 4.2),
+('Pacific Rim Fabrics', 'David Kim', 'david@pacificrimfabrics.com', '+852-555-2007', '505 Harbor Road, Hong Kong', 'PRF-678901', 'Net 45', 21, 1500, 'HKD', TRUE, 4.0),
+('American Cotton Growers', 'Emily Davis', 'emily@americancotton.com', '901-555-2008', '606 Cotton Field Ln, Memphis, TN 38101', 'ACG-789012', 'Net 30', 14, 1000, 'USD', TRUE, 4.4),
+('European Textile Imports', 'Hans Mueller', 'hans@eurotextile.com', '+49-30-555-2009', '707 Fashion Strasse, Berlin 10115, Germany', 'ETI-890123', 'Net 45', 30, 1000, 'EUR', TRUE, 4.1),
+('Silk Road Suppliers', 'Li Wei', 'liwei@silkroadsuppliers.com', '+86-10-555-2010', '808 Ancient Trade St, Beijing 100000, China', 'SRS-901234', 'Net 60', 35, 2000, 'CNY', TRUE, 3.8),
+('Modern Synthetics Inc.', 'Robert Johnson', 'robert@modernsynthetics.com', '770-555-2011', '909 Innovation Pkwy, Atlanta, GA 30301', 'MSI-012345', 'Net 30', 10, 500, 'USD', TRUE, 4.2),
+('Quality Zippers & Fasteners', 'Nancy Parker', 'nancy@qualityzippers.com', '312-555-2012', '111 Component Ave, Chicago, IL 60601', 'QZF-123456', 'Net 15', 7, 200, 'USD', TRUE, 4.5),
+('Southeast Asian Textiles', 'Arun Patel', 'arun@southeastasiantex.com', '+66-2-555-2013', '222 Market Road, Bangkok 10200, Thailand', 'SAT-234567', 'Net 45', 25, 1000, 'THB', TRUE, 3.9),
+('Organic Wool Collective', 'Emma Watson', 'emma@organicwool.com', '+64-4-555-2014', '333 Pasture Lane, Wellington 6011, New Zealand', 'OWC-345678', 'Net 30', 30, 300, 'NZD', TRUE, 4.7),
+('Premium Leather Works', 'Carlos Rodriguez', 'carlos@premiumleather.com', '+34-91-555-2015', '444 Tannery Street, Madrid 28001, Spain', 'PLW-456789', 'Net 45', 21, 100, 'EUR', TRUE, 4.6),
+('Fast Buttons Inc.', 'Grace Lee', 'grace@fastbuttons.com', '212-555-2016', '555 Garment District, New York, NY 10018', 'FBI-567890', 'Net 15', 5, 1000, 'USD', TRUE, 4.0),
+('Eco Packaging Solutions', 'Daniel Smith', 'daniel@ecopackaging.com', '206-555-2017', '666 Green Box Way, Seattle, WA 98101', 'EPS-678901', 'Net 30', 10, 500, 'USD', TRUE, 4.3),
+('Indian Cotton Exports', 'Priya Sharma', 'priya@indiancotton.com', '+91-22-555-2018', '777 Mumbai Textile Park, Mumbai 400001, India', 'ICE-789012', 'Net 60', 28, 2000, 'INR', TRUE, 3.8),
+('Brazilian Sustainable Fabrics', 'Mateo Santos', 'mateo@brazilianfabrics.com', '+55-11-555-2019', '888 Eco Avenue, São Paulo 01000-000, Brazil', 'BSF-890123', 'Net 45', 35, 1000, 'BRL', TRUE, 4.1),
+('North American Thread Co.', 'Jessica Brown', 'jessica@nathread.com', '416-555-2020', '999 Spool Street, Toronto, ON M5V 2H1, Canada', 'NAT-901234', 'Net 30', 14, 500, 'CAD', TRUE, 4.4),
+('Japanese Precision Textiles', 'Kenji Tanaka', 'kenji@jprecisiontex.com', '+81-3-555-2021', '123 Meticulous St, Tokyo 100-0001, Japan', 'JPT-012345', 'Net 30', 21, 500, 'JPY', TRUE, 4.9),
+('Mediterranean Dye Works', 'Elena Rossi', 'elena@meddyeworks.com', '+39-06-555-2022', '234 Colorful Blvd, Rome 00100, Italy', 'MDW-123456', 'Net 45', 21, 300, 'EUR', TRUE, 4.2),
+('Green Energy Textiles', 'Thomas Green', 'thomas@greenenergytex.com', '512-555-2023', '345 Solar Panel Road, Austin, TX 78701', 'GET-234567', 'Net 30', 14, 1000, 'USD', TRUE, 4.5),
+('African Cotton Cooperative', 'Amara Diallo', 'amara@africancotton.com', '+20-2-555-2024', '456 Nile Way, Cairo, Egypt', 'ACC-345678', 'Net 60', 30, 1500, 'USD', TRUE, 3.7),
+('Australian Wool Suppliers', 'Olivia Nelson', 'olivia@aussiewool.com', '+61-2-555-2025', '567 Merino Road, Sydney NSW 2000, Australia', 'AWS-456789', 'Net 45', 35, 500, 'AUD', TRUE, 4.3),
+('Scandinavian Design Textiles', 'Lars Andersen', 'lars@scandtex.com', '+45-33-555-2026', '678 Minimal Street, Copenhagen 1050, Denmark', 'SDT-567890', 'Net 30', 21, 300, 'DKK', TRUE, 4.8),
+('Mexican Artisan Fabrics', 'Isabella Martinez', 'isabella@mexicanartisanfabrics.com', '+52-55-555-2027', '789 Craft Blvd, Mexico City 06000, Mexico', 'MAF-678901', 'Net 45', 28, 500, 'MXN', TRUE, 4.0),
+('Ethical Labor Textiles', 'William Chang', 'william@ethicallabor.com', '415-555-2028', '890 Fair Trade Way, San Francisco, CA 94105', 'ELT-789012', 'Net 30', 14, 1000, 'USD', TRUE, 4.7),
+('Tech Fabric Innovations', 'Alicia Roberts', 'alicia@techfabric.com', '650-555-2029', '901 Smart Material Dr, Palo Alto, CA 94301', 'TFI-890123', 'Net 30', 10, 200, 'USD', TRUE, 4.5);
+
+-- Generate hashed passwords (using SHA-256 for demo purposes - in production use stronger hashing algorithms)
+SET @password_hash = SHA2('demo_password', 256);
+
+-- Populate Customers table
+INSERT INTO customers (FirstName, LastName, Email, Phone, PasswordHash, DateJoined, DateOfBirth, Gender, PreferredLanguage, MarketingPreferences, StoredPaymentMethods, LastLoginDate, IsActive, IsFirstTimeBuyer) VALUES
+('John', 'Smith', 'john.smith@example.com', '212-555-1001', @password_hash, '2020-01-15', '1985-06-12', 'Male', 'en', '{"email":true,"sms":false,"mail":true}', NULL, '2023-05-10 14:30:00', TRUE, FALSE),
+('Emma', 'Johnson', 'emma.johnson@example.com', '415-555-1002', @password_hash, '2020-02-20', '1990-08-24', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"1234","type":"visa","expire":"2025-04"}]}', '2023-05-11 09:15:00', TRUE, FALSE),
+('Michael', 'Davis', 'michael.davis@example.com', '312-555-1003', @password_hash, '2020-03-10', '1978-11-30', 'Male', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"5678","type":"mastercard","expire":"2024-09"}]}', '2023-05-12 17:45:00', TRUE, FALSE),
+('Sophia', 'Wilson', 'sophia.wilson@example.com', '305-555-1004', @password_hash, '2020-04-05', '1995-03-18', 'Female', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-09 10:30:00', TRUE, FALSE),
+('James', 'Taylor', 'james.taylor@example.com', '617-555-1005', @password_hash, '2020-05-22', '1982-09-07', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-08 16:20:00', TRUE, FALSE),
+('Olivia', 'Thomas', 'olivia.thomas@example.com', '213-555-1006', @password_hash, '2020-06-18', '1989-12-15', 'Female', 'en', '{"email":false,"sms":true,"mail":true}', '{"cards":[{"last4":"9012","type":"amex","expire":"2026-01"}]}', '2023-05-11 12:45:00', TRUE, FALSE),
+('Ethan', 'Brown', 'ethan.brown@example.com', '312-555-1007', @password_hash, '2020-07-30', '1992-05-28', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-10 08:30:00', TRUE, FALSE),
+('Isabella', 'Martinez', 'isabella.martinez@example.com', '214-555-1008', @password_hash, '2020-08-14', '1987-07-11', 'Female', 'es', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"3456","type":"visa","expire":"2025-11"}]}', '2023-05-09 19:15:00', TRUE, FALSE),
+('Alexander', 'Garcia', 'alexander.garcia@example.com', '408-555-1009', @password_hash, '2020-09-05', '1980-02-23', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-11 11:30:00', TRUE, FALSE),
+('Mia', 'Lopez', 'mia.lopez@example.com', '305-555-1010', @password_hash, '2020-10-12', '1993-10-09', 'Female', 'es', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"7890","type":"mastercard","expire":"2024-12"}]}', '2023-05-10 20:45:00', TRUE, FALSE),
+('Benjamin', 'Lee', 'benjamin.lee@example.com', '917-555-1011', @password_hash, '2020-11-08', '1984-04-17', 'Male', 'en', '{"email":false,"sms":false,"mail":true}', NULL, '2023-05-09 15:30:00', TRUE, FALSE),
+('Charlotte', 'Walker', 'charlotte.walker@example.com', '415-555-1012', @password_hash, '2020-12-19', '1991-08-06', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"1357","type":"discover","expire":"2025-07"}]}', '2023-05-08 14:15:00', TRUE, FALSE),
+('Daniel', 'Hall', 'daniel.hall@example.com', '404-555-1013', @password_hash, '2021-01-24', '1979-11-22', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-11 18:00:00', TRUE, FALSE),
+('Amelia', 'Allen', 'amelia.allen@example.com', '713-555-1014', @password_hash, '2021-02-07', '1994-06-13', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"2468","type":"visa","expire":"2026-03"}]}', '2023-05-10 10:45:00', TRUE, FALSE),
+('Henry', 'Young', 'henry.young@example.com', '215-555-1015', @password_hash, '2021-03-11', '1986-09-30', 'Male', 'en', '{"email":false,"sms":true,"mail":false}', NULL, '2023-05-09 13:30:00', TRUE, FALSE),
+('Victoria', 'Hernandez', 'victoria.hernandez@example.com', '310-555-1016', @password_hash, '2021-04-03', '1996-01-25', 'Female', 'es', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"3690","type":"amex","expire":"2025-09"}]}', '2023-05-11 16:15:00', TRUE, FALSE),
+('Joseph', 'King', 'joseph.king@example.com', '312-555-1017', @password_hash, '2021-05-15', '1983-05-08', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-12 09:00:00', TRUE, FALSE),
+('Elizabeth', 'Wright', 'elizabeth.wright@example.com', '617-555-1018', @password_hash, '2021-06-22', '1990-12-19', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"4812","type":"mastercard","expire":"2024-11"}]}', '2023-05-10 13:45:00', TRUE, FALSE),
+('Samuel', 'Lopez', 'samuel.lopez@example.com', '415-555-1019', @password_hash, '2021-07-09', '1981-07-14', 'Male', 'es', '{"email":false,"sms":false,"mail":true}', NULL, '2023-05-09 17:30:00', TRUE, FALSE),
+('Sofia', 'Scott', 'sofia.scott@example.com', '305-555-1020', @password_hash, '2021-08-17', '1997-04-02', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"5913","type":"visa","expire":"2026-05"}]}', '2023-05-12 15:15:00', TRUE, FALSE),
+('David', 'Green', 'david.green@example.com', '214-555-1021', @password_hash, '2021-09-25', '1984-11-16', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-12 12:00:00', TRUE, FALSE),
+('Audrey', 'Adams', 'audrey.adams@example.com', '213-555-1022', @password_hash, '2021-10-13', '1993-08-05', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"6024","type":"discover","expire":"2025-12"}]}', '2023-05-11 14:45:00', TRUE, FALSE),
+('Christopher', 'Baker', 'christopher.baker@example.com', '212-555-1023', @password_hash, '2021-11-08', '1980-01-29', 'Male', 'en', '{"email":false,"sms":true,"mail":false}', NULL, '2023-05-09 09:30:00', TRUE, FALSE),
+('Zoe', 'Carter', 'zoe.carter@example.com', '404-555-1024', @password_hash, '2021-12-17', '1995-06-24', 'Female', 'en', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"7135","type":"visa","expire":"2026-08"}]}', '2023-05-12 11:15:00', TRUE, FALSE),
+('Ryan', 'Perez', 'ryan.perez@example.com', '408-555-1025', @password_hash, '2022-01-21', '1986-12-31', 'Male', 'es', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-10 18:00:00', TRUE, FALSE),
+('Natalie', 'Roberts', 'natalie.roberts@example.com', '917-555-1026', @password_hash, '2022-02-09', '1991-04-17', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"8246","type":"mastercard","expire":"2025-06"}]}', '2023-05-09 12:45:00', TRUE, FALSE),
+('Luke', 'Phillips', 'luke.phillips@example.com', '312-555-1027', @password_hash, '2022-03-14', '1982-09-22', 'Male', 'en', '{"email":false,"sms":false,"mail":true}', NULL, '2023-05-12 16:30:00', TRUE, TRUE),
+('Grace', 'Evans', 'grace.evans@example.com', '415-555-1028', @password_hash, '2022-04-28', '1994-11-09', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"9357","type":"amex","expire":"2026-02"}]}', '2023-05-11 10:15:00', TRUE, TRUE),
+('Owen', 'Turner', 'owen.turner@example.com', '214-555-1029', @password_hash, '2022-05-16', '1989-03-26', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-10 14:00:00', TRUE, TRUE),
+('Lily', 'Torres', 'lily.torres@example.com', '305-555-1030', @password_hash, '2022-06-07', '1996-07-13', 'Female', 'es', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"0468","type":"visa","expire":"2025-10"}]}', '2023-05-09 19:45:00', TRUE, TRUE),
+('Nathan', 'Campbell', 'nathan.campbell@example.com', '713-555-1031', @password_hash, '2022-07-19', '1983-10-05', 'Male', 'en', '{"email":false,"sms":true,"mail":false}', NULL, '2023-05-12 13:30:00', TRUE, TRUE),
+('Hannah', 'Mitchell', 'hannah.mitchell@example.com', '213-555-1032', @password_hash, '2022-08-22', '1992-02-28', 'Female', 'en', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"1579","type":"mastercard","expire":"2026-04"}]}', '2023-05-10 09:15:00', TRUE, TRUE),
+('Caleb', 'Roberts', 'caleb.roberts@example.com', '617-555-1033', @password_hash, '2022-09-09', '1981-06-17', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-11 17:00:00', TRUE, TRUE),
+('Chloe', 'Sanchez', 'chloe.sanchez@example.com', '404-555-1034', @password_hash, '2022-10-15', '1997-09-03', 'Female', 'es', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"2680","type":"discover","expire":"2025-03"}]}', '2023-05-12 10:45:00', TRUE, TRUE),
+('Eli', 'Rivera', 'eli.rivera@example.com', '212-555-1035', @password_hash, '2022-11-30', '1984-12-21', 'Male', 'es', '{"email":false,"sms":false,"mail":true}', NULL, '2023-05-10 19:30:00', TRUE, TRUE),
+('Leah', 'Cooper', 'leah.cooper@example.com', '312-555-1036', @password_hash, '2022-12-12', '1993-04-07', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"3791","type":"visa","expire":"2026-07"}]}', '2023-05-09 14:15:00', TRUE, TRUE),
+('Connor', 'Reed', 'connor.reed@example.com', '415-555-1037', @password_hash, '2023-01-08', '1987-08-19', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-12 17:00:00', TRUE, TRUE),
+('Stella', 'Bailey', 'stella.bailey@example.com', '214-555-1038', @password_hash, '2023-02-14', '1990-01-13', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"4802","type":"amex","expire":"2025-08"}]}', '2023-05-11 13:45:00', TRUE, TRUE),
+('Miles', 'Kelly', 'miles.kelly@example.com', '305-555-1039', @password_hash, '2023-03-22', '1985-05-26', 'Male', 'en', '{"email":false,"sms":true,"mail":false}', NULL, '2023-05-10 08:30:00', TRUE, TRUE),
+('Ruby', 'Howard', 'ruby.howard@example.com', '917-555-1040', @password_hash, '2023-04-09', '1998-08-11', 'Female', 'en', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"5913","type":"mastercard","expire":"2026-11"}]}', '2023-05-09 16:15:00', TRUE, TRUE),
+('Jonah', 'Cox', 'jonah.cox@example.com', '213-555-1041', @password_hash, '2023-05-01', '1988-11-29', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-12 15:00:00', TRUE, TRUE),
+('Sierra', 'Ward', 'sierra.ward@example.com', '617-555-1042', @password_hash, '2023-05-17', '1994-03-15', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"6024","type":"visa","expire":"2025-05"}]}', '2023-05-12 09:45:00', TRUE, TRUE),
+('Xavier', 'Brooks', 'xavier.brooks@example.com', '408-555-1043', @password_hash, '2023-05-30', '1986-06-04', 'Male', 'en', '{"email":false,"sms":false,"mail":true}', NULL, '2023-05-11 18:30:00', TRUE, TRUE),
+('Autumn', 'Gray', 'autumn.gray@example.com', '312-555-1044', @password_hash, '2023-06-15', '1991-10-23', 'Female', 'en', '{"email":true,"sms":true,"mail":false}', '{"cards":[{"last4":"7135","type":"discover","expire":"2026-06"}]}', '2023-05-10 11:15:00', TRUE, TRUE),
+('Tyler', 'James', 'tyler.james@example.com', '713-555-1045', @password_hash, '2023-06-29', '1983-02-08', 'Male', 'en', '{"email":true,"sms":false,"mail":false}', NULL, '2023-05-09 15:00:00', TRUE, TRUE),
+('Paisley', 'Bennett', 'paisley.bennett@example.com', '214-555-1046', @password_hash, '2023-07-14', '1995-05-31', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"8246","type":"mastercard","expire":"2025-01"}]}', '2023-05-12 13:45:00', TRUE, TRUE),
+('Elias', 'Reyes', 'elias.reyes@example.com', '305-555-1047', @password_hash, '2023-07-31', '1989-09-17', 'Male', 'es', '{"email":false,"sms":true,"mail":false}', NULL, '2023-05-10 17:30:00', TRUE, TRUE),
+('Willow', 'Fisher', 'willow.fisher@example.com', '212-555-1048', @password_hash, '2023-08-22', '1996-12-04', 'Female', 'en', '{"email":true,"sms":false,"mail":true}', '{"cards":[{"last4":"9357","type":"visa","expire":"2026-09"}]}', '2023-05-11 15:15:00', TRUE, TRUE),
+('Asher', 'Watson', 'asher.watson@example.com', '404-555-1049', @password_hash, '2023-09-05', '1984-04-11', 'Male', 'en', '{"email":true,"sms":true,"mail":false}', NULL, '2023-05-12 12:00:00', TRUE, TRUE),
+('Scarlett', 'Russell', 'scarlett.russell@example.com', '415-555-1050', @password_hash, '2023-09-19', '1990-07-29', 'Female', 'en', '{"email":true,"sms":true,"mail":true}', '{"cards":[{"last4":"0468","type":"amex","expire":"2025-02"}]}', '2023-05-10 14:45:00', TRUE, TRUE);
+
+-- Populate Addresses table
+INSERT INTO addresses (CustomerID, AddressLine1, AddressLine2, City, StateProvince, PostalCode, Country, IsDefaultShipping, IsDefaultBilling, AddressType, IsVerified, IsActive, VerificationDate, VerificationMethod) VALUES
+-- John Smith addresses
+(1, '123 Main St', 'Apt 4B', 'New York', 'NY', '10001', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-01-15 14:30:00', 'Address Verification Service'),
+(1, '456 Work Plaza', 'Suite 200', 'New York', 'NY', '10018', 'USA', FALSE, FALSE, 'BUSINESS', TRUE, TRUE, '2020-01-15 14:35:00', 'Address Verification Service'),
+
+-- Emma Johnson addresses
+(2, '789 Oak Drive', NULL, 'San Francisco', 'CA', '94107', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-02-20 10:15:00', 'Address Verification Service'),
+
+-- Michael Davis addresses
+(3, '101 Pine Avenue', 'Unit 3C', 'Chicago', 'IL', '60611', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-03-10 09:45:00', 'Address Verification Service'),
+(3, '202 Office Park', 'Building 5', 'Chicago', 'IL', '60607', 'USA', FALSE, FALSE, 'BUSINESS', TRUE, TRUE, '2020-03-12 11:20:00', 'Address Verification Service'),
+
+-- Sophia Wilson addresses
+(4, '303 Beach Boulevard', NULL, 'Miami', 'FL', '33139', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-04-05 15:30:00', 'Address Verification Service'),
+
+-- James Taylor addresses
+(5, '404 Beacon Street', 'Apt 7D', 'Boston', 'MA', '02116', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-05-22 16:45:00', 'Address Verification Service'),
+
+-- Olivia Thomas addresses
+(6, '505 Sunset Boulevard', NULL, 'Los Angeles', 'CA', '90069', 'USA', TRUE, FALSE, 'HOME', TRUE, TRUE, '2020-06-18 13:20:00', 'Address Verification Service'),
+(6, '606 Billing Lane', 'Suite 12', 'Los Angeles', 'CA', '90025', 'USA', FALSE, TRUE, 'BILLING', TRUE, TRUE, '2020-06-19 14:10:00', 'Address Verification Service'),
+
+-- Ethan Brown addresses
+(7, '707 Lakeview Drive', 'Apt 12B', 'Chicago', 'IL', '60614', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-07-30 11:55:00', 'Address Verification Service'),
+
+-- Isabella Martinez addresses
+(8, '808 Meadow Lane', NULL, 'Dallas', 'TX', '75201', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-08-14 10:30:00', 'Address Verification Service'),
+
+-- Alexander Garcia addresses
+(9, '909 Technology Drive', 'Suite 500', 'San Jose', 'CA', '95110', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2020-09-05 09:15:00', 'Address Verification Service'),
+
+-- Mia Lopez addresses
+(10, '1010 Ocean Drive', 'Apt 25F', 'Miami', 'FL', '33139', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-10-12 14:40:00', 'Address Verification Service'),
+
+-- Benjamin Lee addresses
+(11, '1111 Park Avenue', 'Apt 15C', 'New York', 'NY', '10028', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-11-08 12:25:00', 'Address Verification Service'),
+
+-- Charlotte Walker addresses
+(12, '1212 Golden Gate Ave', NULL, 'San Francisco', 'CA', '94115', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2020-12-19 15:50:00', 'Address Verification Service'),
+
+-- Daniel Hall addresses
+(13, '1313 Peachtree Street', 'Suite 100', 'Atlanta', 'GA', '30309', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2021-01-24 11:10:00', 'Address Verification Service'),
+
+-- Amelia Allen addresses
+(14, '1414 Westheimer Road', 'Apt 220', 'Houston', 'TX', '77006', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-02-07 13:45:00', 'Address Verification Service'),
+
+-- Henry Young addresses
+(15, '1515 Market Street', NULL, 'Philadelphia', 'PA', '19102', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-03-11 10:20:00', 'Address Verification Service'),
+
+-- Victoria Hernandez addresses
+(16, '1616 Wilshire Blvd', 'Apt 30B', 'Los Angeles', 'CA', '90024', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-04-03 16:15:00', 'Address Verification Service'),
+
+-- Joseph King addresses
+(17, '1717 Michigan Avenue', NULL, 'Chicago', 'IL', '60611', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-05-15 14:30:00', 'Address Verification Service'),
+
+-- Elizabeth Wright addresses
+(18, '1818 Commonwealth Ave', 'Apt 5A', 'Boston', 'MA', '02135', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-06-22 09:45:00', 'Address Verification Service'),
+
+-- Samuel Lopez addresses
+(19, '1919 Divisadero Street', NULL, 'San Francisco', 'CA', '94115', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-07-09 11:30:00', 'Address Verification Service'),
+
+-- Sofia Scott addresses
+(20, '2020 Collins Avenue', 'Apt 1800', 'Miami Beach', 'FL', '33139', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-08-17 15:20:00', 'Address Verification Service'),
+
+-- Additional addresses for next 30 customers (21-50)
+(21, '2121 McKinney Avenue', 'Suite 300', 'Dallas', 'TX', '75201', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2021-09-25 13:15:00', 'Address Verification Service'),
+(22, '2222 Melrose Avenue', NULL, 'Los Angeles', 'CA', '90046', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-10-13 14:50:00', 'Address Verification Service'),
+(23, '2323 Broadway', 'Apt 17D', 'New York', 'NY', '10024', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2021-11-08 16:30:00', 'Address Verification Service'),
+(24, '2424 Peachtree Road', 'Suite 400', 'Atlanta', 'GA', '30305', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2021-12-17 11:45:00', 'Address Verification Service'),
+(25, '2525 Santana Row', NULL, 'San Jose', 'CA', '95128', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-01-21 10:10:00', 'Address Verification Service'),
+(26, '2626 Fifth Avenue', 'Apt 12B', 'New York', 'NY', '10065', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-02-09 09:30:00', 'Address Verification Service'),
+(27, '2727 Canal Street', NULL, 'Chicago', 'IL', '60604', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-03-14 14:25:00', 'Address Verification Service'),
+(28, '2828 Union Street', NULL, 'San Francisco', 'CA', '94123', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-04-28 16:40:00', 'Address Verification Service'),
+(29, '2929 Lower Greenville', 'Apt 3', 'Dallas', 'TX', '75206', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-05-16 13:05:00', 'Address Verification Service'),
+(30, '3030 Brickell Avenue', 'Apt 2500', 'Miami', 'FL', '33129', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-06-07 11:20:00', 'Address Verification Service'),
+(31, '3131 Kirby Drive', 'Suite 200', 'Houston', 'TX', '77098', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2022-07-19 15:35:00', 'Address Verification Service'),
+(32, '3232 Sunset Boulevard', NULL, 'Los Angeles', 'CA', '90026', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-08-22 14:15:00', 'Address Verification Service'),
+(33, '3333 Newbury Street', NULL, 'Boston', 'MA', '02115', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-09-09 10:50:00', 'Address Verification Service'),
+(34, '3434 Piedmont Road', 'Suite 150', 'Atlanta', 'GA', '30305', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2022-10-15 13:30:00', 'Address Verification Service'),
+(35, '3535 Madison Avenue', 'Apt 20C', 'New York', 'NY', '10022', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-11-30 16:20:00', 'Address Verification Service'),
+(36, '3636 Michigan Avenue', 'Apt 1500', 'Chicago', 'IL', '60604', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2022-12-12 15:15:00', 'Address Verification Service'),
+(37, '3737 California Street', NULL, 'San Francisco', 'CA', '94118', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-01-08 11:45:00', 'Address Verification Service'),
+(38, '3838 Knox Street', 'Suite 100', 'Dallas', 'TX', '75205', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2023-02-14 14:10:00', 'Address Verification Service'),
+(39, '3939 Coconut Grove', NULL, 'Miami', 'FL', '33133', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-03-22 09:55:00', 'Address Verification Service'),
+(40, '4040 Park Avenue', 'Apt 55B', 'New York', 'NY', '10022', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-04-09 16:40:00', 'Address Verification Service'),
+(41, '4141 Venice Boulevard', NULL, 'Los Angeles', 'CA', '90019', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-05-01 13:25:00', 'Address Verification Service'),
+(42, '4242 Boylston Street', 'Apt 7D', 'Boston', 'MA', '02116', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-05-17 15:50:00', 'Address Verification Service'),
+(43, '4343 Stevens Creek Blvd', 'Suite 300', 'San Jose', 'CA', '95129', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2023-05-30 14:30:00', 'Address Verification Service'),
+(44, '4444 Wabash Avenue', NULL, 'Chicago', 'IL', '60605', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-06-15 11:15:00', 'Address Verification Service'),
+(45, '4545 Richmond Avenue', 'Suite 200', 'Houston', 'TX', '77027', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2023-06-29 10:05:00', 'Address Verification Service'),
+(46, '4646 Mockingbird Lane', 'Apt 210', 'Dallas', 'TX', '75205', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-07-14 16:35:00', 'Address Verification Service'),
+(47, '4747 Espanola Way', NULL, 'Miami Beach', 'FL', '33139', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-07-31 14:20:00', 'Address Verification Service'),
+(48, '4848 Columbus Avenue', 'Apt 3F', 'New York', 'NY', '10025', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-08-22 13:10:00', 'Address Verification Service'),
+(49, '4949 Roswell Road', 'Suite 100', 'Atlanta', 'GA', '30342', 'USA', TRUE, TRUE, 'BUSINESS', TRUE, TRUE, '2023-09-05 15:45:00', 'Address Verification Service'),
+(50, '5050 Van Ness Avenue', NULL, 'San Francisco', 'CA', '94109', 'USA', TRUE, TRUE, 'HOME', TRUE, TRUE, '2023-09-19 10:30:00', 'Address Verification Service');
+
+-- Add some additional addresses for variety
+INSERT INTO addresses (CustomerID, AddressLine1, AddressLine2, City, StateProvince, PostalCode, Country, IsDefaultShipping, IsDefaultBilling, AddressType, IsVerified, IsActive, VerificationDate, VerificationMethod) VALUES
+-- International addresses
+(5, '10 Regent Street', 'Flat 15', 'London', 'England', 'SW1Y 4LR', 'UK', FALSE, FALSE, 'HOME', TRUE, TRUE, '2020-06-10 09:30:00', 'International Address Verification'),
+(12, '25 Rue du Faubourg', 'Apt 8', 'Paris', 'Île-de-France', '75008', 'France', FALSE, FALSE, 'HOME', TRUE, TRUE, '2021-01-15 10:45:00', 'International Address Verification'),
+(18, '30 Queen Street', 'Suite 500', 'Toronto', 'Ontario', 'M5H 3R3', 'Canada', FALSE, FALSE, 'BUSINESS', TRUE, TRUE, '2021-07-20 14:15:00', 'International Address Verification'),
+(24, '15 Orchard Road', '#08-01', 'Singapore', '', '238826', 'Singapore', FALSE, FALSE, 'HOME', TRUE, TRUE, '2022-02-18 16:30:00', 'International Address Verification'),
+(30, '42 Bondi Road', 'Unit 7', 'Sydney', 'NSW', '2026', 'Australia', FALSE, FALSE, 'HOME', TRUE, TRUE, '2022-08-05 11:20:00', 'International Address Verification'),
+
+-- Some non-verified addresses
+(35, '555 Unverified Street', 'Apt 101', 'Detroit', 'MI', '48201', 'USA', FALSE, FALSE, 'HOME', FALSE, TRUE, NULL, NULL),
+(40, '777 Pending Way', NULL, 'Phoenix', 'AZ', '85001', 'USA', FALSE, FALSE, 'HOME', FALSE, TRUE, NULL, NULL),
+(45, '999 Review Lane', 'Suite 30', 'Portland', 'OR', '97201', 'USA', FALSE, FALSE, 'BUSINESS', FALSE, TRUE, NULL, NULL);
+
+-- Populate Loyalty Accounts table (one for each customer)
+INSERT INTO loyalty_accounts (CustomerID, PointsBalance, TierLevel, TierStartDate, TierEndDate, LifetimePoints) VALUES
+-- Longer-term customers with higher points and tiers
+(1, 5200, 'Icon', '2023-01-01', '2023-12-31', 12500),
+(2, 4800, 'Icon', '2023-01-01', '2023-12-31', 11200),
+(3, 6500, 'Icon', '2023-01-01', '2023-12-31', 15000),
+(4, 3200, 'Enthusiast', '2023-01-01', '2023-12-31', 7800),
+(5, 4100, 'Enthusiast', '2023-01-01', '2023-12-31', 9600),
+(6, 5600, 'Icon', '2023-01-01', '2023-12-31', 13200),
+(7, 2800, 'Enthusiast', '2023-01-01', '2023-12-31', 6500),
+(8, 3700, 'Enthusiast', '2023-01-01', '2023-12-31', 8900),
+(9, 2500, 'Enthusiast', '2023-01-01', '2023-12-31', 5800),
+(10, 4300, 'Enthusiast', '2023-01-01', '2023-12-31', 9100),
+(11, 1800, 'Core', '2023-01-01', '2023-12-31', 4200),
+(12, 2200, 'Enthusiast', '2023-01-01', '2023-12-31', 5500),
+(13, 1500, 'Core', '2023-01-01', '2023-12-31', 3800),
+(14, 2900, 'Enthusiast', '2023-01-01', '2023-12-31', 6300),
+(15, 1300, 'Core', '2023-01-01', '2023-12-31', 3100),
+(16, 3400, 'Enthusiast', '2023-01-01', '2023-12-31', 7200),
+(17, 1100, 'Core', '2023-01-01', '2023-12-31', 2700),
+(18, 2700, 'Enthusiast', '2023-01-01', '2023-12-31', 5900),
+(19, 900, 'Core', '2023-01-01', '2023-12-31', 2200),
+(20, 3100, 'Enthusiast', '2023-01-01', '2023-12-31', 6800),
+-- Newer customers with lower points, mostly Core tier
+(21, 800, 'Core', '2023-01-01', '2023-12-31', 1800),
+(22, 1200, 'Core', '2023-01-01', '2023-12-31', 2600),
+(23, 600, 'Core', '2023-01-01', '2023-12-31', 1400),
+(24, 1500, 'Core', '2023-01-01', '2023-12-31', 3200),
+(25, 700, 'Core', '2023-01-01', '2023-12-31', 1600),
+(26, 1800, 'Core', '2023-01-01', '2023-12-31', 3800),
+(27, 500, 'Core', '2023-01-01', '2023-12-31', 1200),
+(28, 1100, 'Core', '2023-01-01', '2023-12-31', 2500),
+(29, 400, 'Core', '2023-01-01', '2023-12-31', 900),
+(30, 1300, 'Core', '2023-01-01', '2023-12-31', 2800),
+-- Very new customers with minimal points
+(31, 300, 'Core', '2023-01-01', '2023-12-31', 700),
+(32, 600, 'Core', '2023-01-01', '2023-12-31', 1300),
+(33, 200, 'Core', '2023-01-01', '2023-12-31', 450),
+(34, 400, 'Core', '2023-01-01', '2023-12-31', 900),
+(35, 150, 'Core', '2023-01-01', '2023-12-31', 350),
+(36, 350, 'Core', '2023-01-01', '2023-12-31', 800),
+(37, 100, 'Core', '2023-01-01', '2023-12-31', 250),
+(38, 300, 'Core', '2023-01-01', '2023-12-31', 650),
+(39, 75, 'Core', '2023-01-01', '2023-12-31', 150),
+(40, 250, 'Core', '2023-01-01', '2023-12-31', 500),
+-- Newest customers with minimal/no points
+(41, 50, 'Core', '2023-01-01', '2023-12-31', 100),
+(42, 120, 'Core', '2023-01-01', '2023-12-31', 250),
+(43, 30, 'Core', '2023-01-01', '2023-12-31', 80),
+(44, 90, 'Core', '2023-01-01', '2023-12-31', 200),
+(45, 20, 'Core', '2023-01-01', '2023-12-31', 50),
+(46, 60, 'Core', '2023-01-01', '2023-12-31', 150),
+(47, 10, 'Core', '2023-01-01', '2023-12-31', 40),
+(48, 40, 'Core', '2023-01-01', '2023-12-31', 120),
+(49, 5, 'Core', '2023-01-01', '2023-12-31', 30),
+(50, 25, 'Core', '2023-01-01', '2023-12-31', 100);
+
+COMMIT;
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS=1;
+
+-- Verify data
+SELECT 'Suppliers', COUNT(*) FROM suppliers
+UNION ALL
+SELECT 'Customers', COUNT(*) FROM customers
+UNION ALL
+SELECT 'Addresses', COUNT(*) FROM addresses
+UNION ALL
+SELECT 'Loyalty Accounts', COUNT(*) FROM loyalty_accounts;
